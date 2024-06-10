@@ -19,7 +19,7 @@ public class CalculadoraController {
         return "index";
     }
 
-    @PostMapping("/calculadora/calcular")
+    @PostMapping("/calcular")
     public String calcular(@RequestParam("numero1") double numero1,
                            @RequestParam("numero2") double numero2,
                            @RequestParam("operacao") String operacao,

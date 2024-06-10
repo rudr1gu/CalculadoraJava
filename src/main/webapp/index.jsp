@@ -3,61 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/style.css">
     <title>Calculadora Java</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .corpoCalc {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
-        }
-
-        .screen {
-            width: 300px;
-            height: 50px;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding-right: 10px;
-            font-size: 20px;
-        }
-
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 10px;
-            margin-top: 10px;
-        }
-
-        .btn {
-            width: 70px;
-            height: 70px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: #ccc;
-        }
-    </style>
     <script>
         function enviarOperacao(operacao) {
             document.getElementById("operacao").value = operacao;
@@ -87,7 +34,7 @@
     <h1>Calculadora Java</h1>
 
     <section class="corpoCalc">
-        <form id="calculadoraForm" action="/calculadora/calcular" method="post">
+        <form id="calculadoraForm" action="/calcular" method="post">
             <input type="hidden" name="operacao" id="operacao">
             <div class="screen" id="screen">
                 <%= request.getAttribute("resultado") != null ? request.getAttribute("resultado") : 0 %>

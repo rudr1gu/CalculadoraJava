@@ -1,23 +1,19 @@
-package com.example.calculadora.controller;
-
-import com.example.calculadora.service.CalculadoraService;
+package com.example.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
 
 @Controller
-public class CalculadoraController {
-
-    @Autowired
-    private CalculadoraService calculadoraService;
-
+public class LocalizaocaoController {
     @GetMapping("/calculadora")
     public String index() {
         return "index";
     }
+     @Autowired
+    private CalculadoraService calculadoraService;
 
     @PostMapping("/calcular")
     public String calcular(@RequestParam("numero1") double numero1,

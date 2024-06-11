@@ -1,129 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .corpoCalc {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
-        }
-
-        .screen {
-            width: 300px;
-            height: 50px;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding-right: 10px;
-            font-size: 20px;
-        }
-
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 10px;
-            margin-top: 10px;
-        }
-
-        .btn {
-            width: 70px;
-            height: 70px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: #ccc;
-        }
-    </style>
-    <title>Calculadora Java</title>
-    <script>
-        function enviarOperacao() {
-            var screen = document.getElementById('screen');
-            var valor = screen.innerText.split(" ");
-                document.getElementById("numero1").value = valor[0];
-                document.getElementById("numero2").value = valor[2];
-                document.getElementById("operacao").value = valor[1];
-                document.getElementById('calculadoraForm').submit();
-           
-        }
-
-        function adicionarNumero(numero) {
-            var screen = document.getElementById('screen');
-            if (screen.innerText === "0") {
-                screen.innerText = numero;
-            } else {
-                screen.innerText += numero;
-            }
-        }
-
-        function adicionarOperador(operador) {
-            var screen = document.getElementById('screen');
-            var texto = screen.innerText;
-            if (!texto.includes(" ")) {
-                screen.innerText += " " + operador + " ";
-            } else {
-                alert("Por favor, insira apenas um operador.");
-            }
-        }
-
-        function limparTela() {
-            document.getElementById('screen').innerText = "0";
-        }
-    </script>
+    <title>Calculadora</title>
 </head>
 <body>
-    <h1>Calculadora Java</h1>
+    <h1>Calculadora</h1>
+    <form action="/calcular" method="post">
+        <input type="number" name="numero1" placeholder="Número 1" required>
+        <input type="number" name="numero2" placeholder="Número 2" required>
+        <select name="operacao" required>
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <button type="submit">Calcular</button>
+    </form>
 
-    <section class="corpoCalc">
-        <form id="calculadoraForm" action="/calcular" method="post">
-            <input type="hidden" name="operacao" id="operacao">
-            <div class="screen" id="screen">
-                <h2 th:if="${resultado != null}"><span th:text="${resultado}"></span></h2>
-                <h2 th:if="${resultado == null}">0</h2>
-            </div>
-            <div class="buttons">
-                <button type="button" class="btn" onclick="adicionarNumero('7')">7</button>
-                <button type="button" class="btn" onclick="adicionarNumero('8')">8</button>
-                <button type="button" class="btn" onclick="adicionarNumero('9')">9</button>
-                <button type="button" class="btn" onclick="adicionarOperador('/')">/</button>
-                <button type="button" class="btn" onclick="adicionarNumero('4')">4</button>
-                <button type="button" class="btn" onclick="adicionarNumero('5')">5</button>
-                <button type="button" class="btn" onclick="adicionarNumero('6')">6</button>
-                <button type="button" class="btn" onclick="adicionarOperador('*')">*</button>
-                <button type="button" class="btn" onclick="adicionarNumero('1')">1</button>
-                <button type="button" class="btn" onclick="adicionarNumero('2')">2</button>
-                <button type="button" class="btn" onclick="adicionarNumero('3')">3</button>
-                <button type="button" class="btn" onclick="adicionarOperador('-')">-</button>
-                <button type="button" class="btn" onclick="adicionarNumero('0')">0</button>
-                <button type="button" class="btn" onclick="adicionarNumero('.')">.</button>
-                <button type="button" class="btn" onclick="enviarOperacao()">=</button>
-                <button type="button" class="btn" onclick="adicionarOperador('+')">+</button>
-                <button type="button" class="btn" onclick="limparTela()">C</button>
-            </div>
-            <input type="hidden" name="numero1" id="numero1">
-            <input type="hidden" name="numero2" id="numero2">
-        </form>
-        
-    </section>
+    <!-- Verifica se existe um resultado e exibe-o -->
+    <h2 th:if="${resultado != null}">Resultado: <span th:text="${resultado}"></span></h2>
 </body>
 </html>

@@ -12,6 +12,7 @@ public class LocalizaocaoController {
     public String index() {
         return "index";
     }
+    
      @Autowired
     private CalculadoraService calculadoraService;
 

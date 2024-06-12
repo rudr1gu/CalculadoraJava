@@ -1,130 +1,107 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .corpoCalc {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 50px;
-        }
-
-        .screen {
-            width: 300px;
-            height: 50px;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding-right: 10px;
-            font-size: 20px;
-        }
-
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-gap: 10px;
-            margin-top: 10px;
-        }
-
-        .btn {
-            width: 70px;
-            height: 70px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: #ccc;
-        }
-    </style>
-    <title>Calculadora</title>
-    <script>
-        function enviarOperacao() {
-            var screen = document.getElementById('screen');
-            var valor = screen.innerText.split(" ");
-                document.getElementById("numero1").value = valor[0];
-                document.getElementById("numero2").value = valor[2];
-                document.getElementById("operacao").value = valor[1];
-                document.getElementById('calculadoraForm').submit();
-           
-        }
-
-        function adicionarNumero(numero) {
-            var screen = document.getElementById('screen');
-            if (screen.innerText === "0") {
-                screen.innerText = numero;
-            } else {
-                screen.innerText += numero;
-            }
-        }
-
-        function adicionarOperador(operador) {
-            var screen = document.getElementById('screen');
-            var texto = screen.innerText;
-            if (!texto.includes(" ")) {
-                screen.innerText += " " + operador + " ";
-            } else {
-                alert("Por favor, insira apenas um operador.");
-            }
-        }
-
-        function limparTela() {
-            document.getElementById('screen').innerText = "0";
-        }
-    </script>
+    <title>Calculadora Java</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
 </head>
 <body>
-    <h1>Calculadora</h1>
-    <section class="corpoCalc">
+    <div class="wrapper">
+        
+        <section class="screen" id="tela" th:text="${resultado != null ? resultado : '0'}">0</section>
+
         <form id="calculadoraForm" action="/calcular" method="post">
-            <input type="hidden" name="operacao" id="operacao">
-            <div class="screen" id="screen">
-                <h2 th:if="${resultado != null}"><span th:text="${resultado}"></span></h2>
-                <h2 th:if="${resultado == null}">0</h2>
-            </div>
-            <div class="buttons">
-                <button type="button" class="btn" onclick="adicionarNumero(' 7')">7</button>
-                <button type="button" class="btn" onclick="adicionarNumero(' 8')">8</button>
-                <button type="button" class="btn" onclick="adicionarNumero(' 9')">9</button>
-                <button type="button" class="btn" onclick="adicionarOperador('/')">/</button>
-                <button type="button" class="btn" onclick="adicionarNumero(' 4')">4</button>
-                <button type="button" class="btn" onclick="adicionarNumero(' 5')">5</button>
-                <button type="button" class="btn" onclick="adicionarNumero(' 6')">6</button>
-                <button type="button" class="btn" onclick="adicionarOperador('*')">*</button>
-                <button type="button" class="btn" onclick="adicionarNumero(' 1')">1</button>
-                <button type="button" class="btn" onclick="adicionarNumero(' 2')">2</button>
-                <button type="button" class="btn" onclick="adicionarNumero(' 3')">3</button>
-                <button type="button" class="btn" onclick="adicionarOperador('-')">-</button>
-                <button type="button" class="btn" onclick="adicionarNumero(' 0')">0</button>
-                <button type="button" class="btn" onclick="adicionarNumero('.')">.</button>
-                <button type="button" class="btn" onclick="enviarOperacao()">=</button>
-                <button type="button" class="btn" onclick="adicionarOperador('+')">+</button>
-                <button type="button" class="btn" onclick="limparTela()">C</button>
-            </div>
             <input type="hidden" name="numero1" id="numero1">
             <input type="hidden" name="numero2" id="numero2">
+            <input type="hidden" name="operacao" id="operacao">
         </form>
-        
-    </section>
 
-    
+        <section class="calc-buttons">
+            <div class="cal-button-row">
+                <button class="calc-button double" onclick="clearScreen()">C</button>
+                <button class="calc-button" onclick="backspace()">←</button>
+                <button class="calc-button" onclick="adicionarOperador('/')">÷</button>
+            </div>
+
+            <div class="cal-button-row">
+                <button class="calc-button" onclick="adicionarNumero('7')">7</button>
+                <button class="calc-button" onclick="adicionarNumero('8')">8</button>
+                <button class="calc-button" onclick="adicionarNumero('9')">9</button>
+                <button class="calc-button" onclick="adicionarOperador('*')">x</button>
+            </div>
+
+            <div class="cal-button-row">
+                <button class="calc-button" onclick="adicionarNumero('4')">4</button>
+                <button class="calc-button" onclick="adicionarNumero('5')">5</button>
+                <button class="calc-button" onclick="adicionarNumero('6')">6</button>
+                <button class="calc-button" onclick="adicionarOperador('-')">-</button>
+            </div>
+
+            <div class="cal-button-row">
+                <button class="calc-button" onclick="adicionarNumero('1')">1</button>
+                <button class="calc-button" onclick="adicionarNumero('2')">2</button>
+                <button class="calc-button" onclick="adicionarNumero('3')">3</button>
+                <button class="calc-button" onclick="adicionarOperador('+')">&plus;</button>
+            </div>
+
+            <div class="cal-button-row">
+                <button class="calc-button double" onclick="adicionarNumero('0')">0</button>
+                <button class="calc-button" onclick="adicionarNumero('.')">.</button>
+                <button class="calc-button" onclick="enviarOperacao('=')">&equals;</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let numero1 = '';
+        let numero2 = '';
+        let operacao = '';
+        let novoNumero = false;
+        
+        function adicionarNumero(numero) {
+            const tela = document.getElementById('tela');
+            if (tela.innerText === '0' || novoNumero) { 
+                tela.innerText = numero; 
+                novoNumero = false;
+            } else {
+                tela.innerText += numero;
+            }
+        }
+
+       
+        function adicionarOperador(op) {
+            const tela = document.getElementById('tela');
+            if (operacao && !novoNumero) {
+                enviarOperacao();
+            }
+            numero1 = tela.innerText;
+            operacao = op;
+            novoNumero = true;
+        }
+
+        function enviarOperacao() {
+            if (!operacao) { 
+                return;
+            }
+            const tela = document.getElementById('tela');
+            numero2 = tela.innerText;
+            document.getElementById('numero1').value = numero1;
+            document.getElementById('numero2').value = numero2;
+            document.getElementById('operacao').value = operacao;
+            document.getElementById('calculadoraForm').submit();
+        }
+
+        function clearScreen() {
+            document.getElementById('tela').innerText = '0'; 
+            numero1 = '';
+            numero2 = '';
+            operacao = '';
+            novoNumero = false;
+        }
+
+        function backspace() {
+            const tela = document.getElementById('tela');
+            tela.innerText = tela.innerText.slice(0, -1) || '0';
+        }
+    </script>
 </body>
 </html>

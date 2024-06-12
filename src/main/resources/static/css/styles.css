@@ -1,0 +1,143 @@
+*, *::before, *::after{
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body ,html{
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+}
+
+:root{
+    --cor1: #262626;
+    --cor2: #595959;
+    --cor3: #F2F2F2;
+    --cor4: #D0E2F2;
+    --cor5: #8D9AA6;
+}
+
+body{
+    align-items: center;
+    background: linear-gradient(45deg, var(--cor3), var(--cor4), var(--cor5));
+    display: flex;
+    font-family:  "Josefin Sans",sans-serif;
+    font-display: swap;
+    height: inherit;
+    justify-content: center;
+}
+
+nav {
+    display: block;
+    position: absolute;
+    top:0;
+    background-color: var(--cor1);
+    width: 100vw;
+    min-height: 70px;
+    max-height: 90px;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+span {
+    color: var(--cor4);
+}
+
+header{
+    display: block;
+    position: absolute;
+    top: 90px;
+    color: var(--cor1);
+    text-shadow: 0 3px var(--cor5);
+}
+
+.wrapper {
+    border-radius: 16px;
+    color: #232323;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    flex-basis: 400px;
+    padding: 20px 35px;
+}
+
+.screen{
+    backdrop-filter: blur(5.5px);
+    -webkit-backdrop-filter: blur(5.5px);
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(40, 40, 40, 0.1);
+    color: #232323;
+    font-size: 35px;
+    overflow: auto ;
+    padding: 15px;
+    text-align: right;
+    width: 100%;
+}
+
+.cal-button-row{
+    display: flex;
+    justify-content:space-between;
+    margin: 5% 0;
+}
+
+.calc-button {
+    backdrop-filter: blur(5.5px);
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px  rgba(0, 0, 0, 0.1);
+    color: #232323;
+    flex-basis: 20%;
+    font-family: inherit;
+    font-size: 1.2em;
+    height: 7vh;
+}
+
+.calc-button:last-child{
+    backdrop-filter: blur(5.5px);
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px  rgba(0, 0, 0, 0.1);
+    color: white;
+    background: var(--cor1);
+}
+
+.calc-button:last-child:hover{
+    background-color: inherit;
+    color:inherit;
+}
+
+
+.calc-button:hover {
+    background-color: inherit;
+}
+
+.calc-button:active{
+    background-color: var(--cor4);
+}
+
+.double{
+    flex-basis: 47% ;
+}
+
+.triple{
+    flex-basis: 73%;
+}
+
+@media screen and (max-width:450px){
+    .screen{
+        padding: 10px;
+        text-align: right;
+    }   
+    .calc-button {    
+        font-size: 20px;
+        height: 7vh;
+    }
+}

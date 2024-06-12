@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
 @Controller
-public class LocalizaocaoController {
+public class CalculadoraController {
     @GetMapping("/calculadora")
     public String index() {
         return "index";
